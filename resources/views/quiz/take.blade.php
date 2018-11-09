@@ -17,7 +17,7 @@
 							@foreach($quiz as $index => $question)
 							<div class="tab">
 								<div class="register_form_title">{{$index+1}} &nbsp; {{$question->quest}}</div>
-								<input type="hsiokifskjfs" name="question-id-{{$index}}" value="{{$question->id}}" />
+								<input type="hidden" name="question-id-{{$index}}" value="{{$question->id}}" />
 								<div class="register_form">
 									<div class="row register_row">
 										@if($question->quest_type === "qcm")		
