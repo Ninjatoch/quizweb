@@ -21,5 +21,7 @@ class Student extends Model
         $student->quiz_id = $quiz_id;
         $student->name = $name;
         $student->save();
+        $stu = Student::select("id")->orderBy("id", "desc")->first();
+        return $stu->id;
     }
 }

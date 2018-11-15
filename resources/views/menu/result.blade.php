@@ -31,7 +31,7 @@
                                 <div class="course_footer d-flex flex-row align-items-center justify-content-start">
                                     <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$room->participants}}</span></div>
                                     <!--<div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>-->
-                                    <div class="course_mark course_free trans_200"><a href="#" data-room="{{$room}}" data-toggle="modal" data-target="#join-room">Join</a></div>
+                                    <div class="course_mark course_free trans_200"><a href="#" @if($room->participants > 0) data-room="{{$room}}" data-toggle="modal" data-target="#join-room"@endif >@if($room->participants > 0)Join @else Full @endif</a></div>
                                 </div>
                             </div>
                         </div>

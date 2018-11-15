@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Quiz;
 use App\Question;
 use App\Room;
+use App\Student;
+use App\Answer;
+use App\Response;
 use Auth;
 use Session;
 
@@ -71,7 +74,13 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        $students = Student::where("room_id", $id)->paginate(10);
+        $room = Room::find($id);
+        $questions = Question::where("quiz_id", $room->quiz_id)->get();
+        $answers = Answer::where("quiz_id", $room->quiz_id)->where("correction", 1)->get();
+        foreach($students as $index => $student)
+            $responses[$index] = Response::where("quiz_id", $room->quiz_id)->where("student_id", $student->id)->get();   
+        return view("room.show", ["responses" => $responses, "students" => $students, "room" => $room, "questions" => $questions, "answers" => $answers ]);
     }
 
     public function search(Request $request)
