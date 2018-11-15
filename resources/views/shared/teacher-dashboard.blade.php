@@ -115,7 +115,7 @@
 				    </div>
 			        <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="takequiz" class="btn btn-primary">Take Quiz</button>
+                        <button type="submit" id="correcting_quiz" class="btn btn-primary">Submit</button>
 			    	</div>
 		        </div>
 			</div>

@@ -8,6 +8,7 @@ $(".correct-quiz").click(function(){
     //console.log(student);
     $(".correct_quiz").html("");
     $("h5.modal-title").html(student["name"]);
+    $("button:submit#correcting_quiz").attr("data-student_id", student["id"]);
     var score = 0;
     var short_answer = 0;
     $.each(questions, function(index, question){
@@ -52,9 +53,13 @@ $(".correct-quiz").click(function(){
         {
             $(".correct_quiz").html("");
             var elem;
-            elem = $("<h3>Total Score: " + getScore(questions.length, score) + "</h3>").addClass("text-center");
+            elem = $("<h3>Total Score: " + getScore(questions.length, score) + " / 100" + "</h3>").addClass("text-center");
             elem.attr("style", "color: green");
             $(".correct_quiz").append(elem);
         }
     }
+
+    $("button:submit[data-student_id='"+ student["id"] + "']").click(function(){
+        alert(score);
+    })
 });
