@@ -80,7 +80,7 @@
                   <div class="search_form_container">
                     <form action="/rooms/search" method="POST"  id="search_form" class="search_form trans_400">
                       @csrf
-                      <input type="search" name="room_name" class="header_search_input trans_400" placeholder="Search Room" required="required">
+                      <input type="search" autocomplete="off" name="room_name" class="header_search_input trans_400" placeholder="Search Room" required="required">
                       <div class="search_button">
                         <i class="fa fa-search" aria-hidden="true"></i>
                       </div>

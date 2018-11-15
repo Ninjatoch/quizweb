@@ -52,35 +52,7 @@
               </div>				
             </div>
           
-            <header class="header">
-              
-              <!-- Top Bar -->
-              <div class="top_bar">
-                <div class="top_bar_container">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col">
-                        <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                          <div class="top_bar_phone"><span class="top_bar_title">phone:</span>0965 369 639</div>
-                          <div class="top_bar_right ml-auto">
-          
-                            <!-- Social -->
-                            <div class="top_bar_social">
-                              <span class="top_bar_title social_title">follow us</span>
-                              <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>				
-              </div>
-          
+            
               <!-- Header Content -->
               <div class="header_container">
                 <div class="container">
@@ -118,15 +90,37 @@
                   </div>
                 </div>
               </div>
-            </div>
-          
-        </header>
+            
+         
           
         @extends("shared.menu")
     </header>
 	<div style="height: 90px"></div>
 	
-	@yield("content")
+  @yield("content")
+  
+  <!-- Modal -->
+	<form action="#" method="GET">
+	    <div class="modal fade" id="correction-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			        <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+				    </div>
+			        <div class="modal-body">
+                        <div class="correct_quiz"></div>
+				    </div>
+			        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="takequiz" class="btn btn-primary">Take Quiz</button>
+			    	</div>
+		        </div>
+			</div>
+		</div>
+	</form>
 </div>
 
 <script src="/js/jquery-3.2.1.min.js"></script>
@@ -137,6 +131,7 @@
 <script src="/js/custom.js"></script>
 <script src="/js/quiz.js"></script>
 <script src="/js/question.js"></script>
-
+<script src="/js/correct-quiz.js"></script>
+<script src="/js/utilise.js"></script>
 </body>
 </html>

@@ -66,7 +66,8 @@ class QuizController extends Controller
             {
                 $students = array("quiz_id" => $quiz_id, "room_id" => $room_id, "nickname" => $nickname);
                 $student = new Student;
-                $student->add($students);
+                $student_id = $student->add($students);
+                session(["student_id" => $student_id]);
                 $room->update_room($room_id);
             }
             return view("quiz.take", ["quiz" => $quiz]);
@@ -76,7 +77,7 @@ class QuizController extends Controller
 
     public function submit(Request $request)
     {
-        return response()->json(['mesadfea' => "dfladfsaf", "code" => "200"]);
+        return response()->json($request);
     }
 
     /**

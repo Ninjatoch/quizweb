@@ -37,5 +37,6 @@ Route::resources([
     "questions" => "QuestionController",
     "answers" => "AnswerController",
     "rooms" => "RoomController",
-    "students" => "StudentController"
+    "students" => "StudentController",
+    "responses" => "ResponseController"
 ]);

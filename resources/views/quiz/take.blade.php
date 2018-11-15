@@ -13,7 +13,8 @@
 					<div class="register_form_container">						  
 						<form name="quiz-form" action="/test" id="finishQuiz" method="POST">
 							@csrf
-							<input type="hidden" name="quiz-id" value="{{$quiz[0]->quiz_id}}">
+							<input type="hidden" name="_method" value="POST"/>
+							<input type="hidden" name="quiz_id" value="{{$quiz[0]->quiz_id}}">
 							@foreach($quiz as $index => $question)
 							<div class="tab">
 								<div class="register_form_title">{{$index+1}} &nbsp; {{$question->quest}}</div>
@@ -23,20 +24,20 @@
 										@if($question->quest_type === "qcm")		
 											@foreach($question->answers as $answer)	
 												<div class="col-lg-12 register_col" style="margin-bottom: 10px; padding: 5px;">
-													<input type="radio" name="answer-{{$index}}" value="{{$answer["correction"]}}"> {{$answer["response"]}}
+													<input type="radio" name="answer-{{$index}}" data-correct="{{$answer["correction"]}}" value="{{$answer["response"]}}"> {{$answer["response"]}}
 												</div>
 											@endforeach
 										@elseif($question->quest_type === "tnf")
 											<div class="col-lg-12 register_col">
 												
-												<input type="radio" name="answer-{{$index}}" data-name="answer-{{$index}}" class="answer-true" value="True" style="display:none;"/>
+												<input type="radio" name="answer-{{$index}}" data-name="answer-{{$index}}" class="answer-true" data-correct="{{$answer['correction']}}" value="True" style="display:none;"/>
 												<input class="btn btn-light btn-form" type="button" data-name="answer-{{$index}}"  value="TRUE">
-												<input type="radio" name="answer-{{$index}}" data-name="answer-{{$index}}" class="answer-false" value="False" style="display:none;"/>
+												<input type="radio" name="answer-{{$index}}" data-name="answer-{{$index}}" class="answer-false" data-correct="{{$answer['correction']}}" value="False" style="display:none;"/>
 												<input class="btn btn-light btn-form" type="button" data-name="answer-{{$index}}" style="float:right" value="FALSE">
 											</div>
 										@else
 											<div class="col-lg-12 register_col">
-												<input type="text" name="answer-{{$index}}" class="form_input" placeholder="Answer" required="required">
+												<input type="text" name="answer-{{$index}}" class="form_input" data-correct="0" placeholder="Answer" required="required">
 											</div>
 										@endif
 									</div>
@@ -44,7 +45,7 @@
 							</div>
 							@endforeach
 						
-							<div style="overflow:auto;">
+							<div id="btn" style="overflow:auto;">
 								<div style="float:right;">
 									<button type="button" id="prevBtn" class="btn btn-danger" onclick="nextPrev(-1)">Previous</button>
 									<input type="button" id="nextBtn" class="btn btn-success" onclick="nextPrev(1)" value="Next"></button>

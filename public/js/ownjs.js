@@ -34,7 +34,15 @@ $("#take-quiz").click(function(){
                 room_id: room["id"], 
                 nickname: nickname 
             },
+            success: function(){
+                swal("Thank You", "Your request has been submitted", "success")
+                .then((value) => { location.href = "/index" });
+            }
         });
+
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
     }
 });
 
@@ -58,11 +66,9 @@ $("input:button[value='FALSE']").click(function(){
     $("input:button[value='TRUE']").addClass("btn-light");
 });
 
-
-//
 var currentTab = 0; // Current tab is set to be the first tab (0)
-
 showTab(currentTab); // Display the current tab
+//
 
 function showTab(n) {
     // This function will display the specified tab of the form...
@@ -84,7 +90,6 @@ function showTab(n) {
 function nextPrev(n) {
     if(n > 0 && $("input[name='answer-" + currentTab +"']").attr("type") === "radio")
     {
-        console.log($("input[name='answer-" + currentTab +"']:checked").val());
         if($("input[name='answer-" + currentTab +"']:checked").val() !== undefined)
             sub_nextPrev(n);
         else
@@ -100,7 +105,7 @@ function nextPrev(n) {
             event.preventDefault();
         }
         else
-        sub_nextPrev(n);
+            sub_nextPrev(n);
     }
   }
 function sub_nextPrev(n)
@@ -114,11 +119,9 @@ function sub_nextPrev(n)
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
     // ... the form gets submitted:
-        // var form = $('form[name="quiz-form"]')[0];
-        //console.log( $( 'form[name="quiz-form"]' ).serialize() );
-        var fd = new FormData();
-        
+        $("#btn").hide();
         var answers = [];
+        var quiz_id = $("input[name='quiz_id']").val();
         for(var index = 0; index  < x.length; index ++)
         {
             var question_id = $("input[name='question-id-" + index + "']").val();
@@ -126,19 +129,14 @@ function sub_nextPrev(n)
                 var response = $("input[name='answer-" + index + "']:checked").val();
             else 
                 var response = $("input[name='answer-" + index + "']").val();
+            var correct = $("input[name='answer-" + index + "']").attr("data-correct");
             var answer = {
                 question_id: question_id,
-                answer: response
+                answer: response,
+                correct: correct
             }
             answers.push(answer);
-
-            // if($("input[name='answer-" + index +"']").attr("type") === "radio")
-            //     answers[index] = $("input[name='answer-" + index + "']:checked").val();
-            // else 
-            //     answers[index] = $("input[name='answer-" + index + "']").val();
         }
-        console.log(answers);
-        //fd.append("answers[]",  answers);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -146,19 +144,21 @@ function sub_nextPrev(n)
         });
         $.ajax({
             type: "POST",
-            url: "/test",
-            data: { answers: answers} ,
+            url: "/responses",
+            data: { answers: answers, quiz_id: quiz_id} ,
             success: function(data)
             {
                 console.log(data);
+                // swal("THANK YOU","Your answers have been submitted", "success").then(
+                //     (value) => { location.href = "/index"; } 
+                // );
+                    
             }
         });
-        return;
-        //event.preventDefault();
-        document.getElementById("finishQuiz").submit();
-        return false;
+        //return false;
+        event.preventDefault();
     }
-    
+    else
     // Otherwise, display the correct tab:
-    showTab(currentTab);
+        showTab(currentTab);
 }

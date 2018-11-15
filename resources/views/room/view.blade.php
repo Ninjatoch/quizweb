@@ -18,7 +18,7 @@
                     <tr>
                         <th>Status</th>
                         <th>Room</th>
-                        <th>Number of participants</th>
+                        <th>Free Space</th>
                         <th>Created By</th>
                         <th>Created Date</th>
                         <th></th>
